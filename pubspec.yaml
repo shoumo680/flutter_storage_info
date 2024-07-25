@@ -26,3 +26,5 @@ flutter:
       android:
         package: com.example.flutter_storage_info
         pluginClass: FlutterStorageInfoPlugin
+      ios:
+        pluginClass: FlutterStorageInfoPlugin

@@ -10,21 +10,24 @@ public class FlutterStorageInfoPlugin: NSObject, FlutterPlugin {
 
   public func handle(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
     switch call.method {
-    case "getStorageFreeSpace":
-           if let homeDirectoryURL = URL(string: NSHomeDirectory()) {
-               do {
-                   let values = try homeDirectoryURL.resourceValues(forKeys: [.volumeTotalCapacityKey, .volumeAvailableCapacityForImportantUsageKey])
-                   if let totalSpace = values.volumeTotalCapacity, let freeSpace = values.volumeAvailableCapacityForImportantUsage {
-                       result(freeSpace)
-                       break
-                   }
-               } catch {
-                   result(1)
-                    break
-               }
-           }
-           result(2)
-           break
+       case "getStorageFreeSpace":
+              if let homeDirectoryURL = URL(string: NSHomeDirectory()) {
+                  do {
+                      let values = try homeDirectoryURL.resourceValues(forKeys: [.volumeAvailableCapacityForImportantUsageKey])
+                      if let freeSpace = values.volumeAvailableCapacityForImportantUsage {
+                          result(freeSpace)
+                          break
+                      }else{
+                          result(1)
+                          break
+                      }
+                  } catch {
+                      result(2)
+                      break
+                  }
+              }
+              result(3)
+              break
     default:
       result(FlutterMethodNotImplemented)
     }

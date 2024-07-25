@@ -1,5 +1,6 @@
 import Flutter
 import UIKit
+import Foundation
 
 public class FlutterStorageInfoPlugin: NSObject, FlutterPlugin {
   public static func register(with registrar: FlutterPluginRegistrar) {

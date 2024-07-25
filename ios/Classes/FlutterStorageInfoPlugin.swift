@@ -14,14 +14,16 @@ public class FlutterStorageInfoPlugin: NSObject, FlutterPlugin {
            if let homeDirectoryURL = URL(string: NSHomeDirectory()) {
                do {
                    let values = try homeDirectoryURL.resourceValues(forKeys: [.volumeTotalCapacityKey, .volumeAvailableCapacityForImportantUsageKey])
-                   if let freeSpace = values.volumeAvailableCapacityForImportantUsage {
+                   if let totalSpace = values.volumeTotalCapacity, let freeSpace = values.volumeAvailableCapacityForImportantUsage {
                        result(freeSpace)
+                       break
                    }
                } catch {
-                   result(0)
+                   result(1)
+                    break
                }
            }
-           result(0)
+           result(2)
            break
     default:
       result(FlutterMethodNotImplemented)
